@@ -174,7 +174,7 @@ function projCard(p, i, big){
   return `<a class="cell c-card proj${big?' proj-big':''}" href="#/proyectos/${p.id}">
     ${shot(p.shot, T.caseLabels.shot, TONES[i % 3])}
     <div class="proj-meta">
-      <p class="eyebrow">${t.type || ''}</p>
+      <p class="eyebrow">${t.type || ''}${p.concept ? ` · <span class="concept">${T.caseLabels.concept}</span>` : ''}</p>
       <h3>${p.name}</h3>
       ${t.summary ? `<p class="soft">${t.summary}</p>` : ''}
       ${catChips(p)}
@@ -247,6 +247,7 @@ function caso(id){
       <div class="hero-top"><p class="eyebrow">${t.type || ''}</p><a class="back" href="#/proyectos">${L.back}</a></div>
       <h1>${p.name}</h1>
       <p class="lead">${t.summary || L.phSummary}</p>
+      ${(p.url || p.concept) ? `<div class="case-actions">${p.url ? `<a class="btn btn-accent" href="${esc(p.url)}" target="_blank" rel="noopener">${L.live} ↗</a>` : ''}${p.concept ? `<span class="concept-pill">${L.concept}</span>` : ''}</div>` : ''}
     </div>
     <div class="cell c-card case-facts">
       <div><p class="eyebrow soft">${L.services}</p><div class="tags" style="margin-top:12px">${p.cats.map(c=>`<span>${f[c]}</span>`).join('')}</div></div>
@@ -256,19 +257,19 @@ function caso(id){
   </section>
   <div class="case-shot">${shot(p.shot, L.shot, TONES[i % 3])}</div>
   <section class="grid case-three">
-    <div class="cell c-card"><p class="eyebrow soft">01</p><h2>${L.challenge}</h2><p class="soft">${t.challenge || L.phChallenge}</p></div>
+    <div class="cell c-card"><p class="eyebrow soft">01</p><h2>${p.concept ? L.idea : L.challenge}</h2><p class="soft">${t.challenge || L.phChallenge}</p></div>
     <div class="cell c-sand"><p class="eyebrow soft">02</p><h2>${L.did}</h2><ul class="checks small">${did.map(x=>`<li>${CHECK}<span>${x}</span></li>`).join('')}</ul></div>
-    <div class="cell c-card"><p class="eyebrow soft">03</p><h2>${L.result}</h2><p class="soft">${t.result || L.phResult}</p></div>
+    <div class="cell c-card"><p class="eyebrow soft">03</p><h2>${p.concept ? L.status : L.result}</h2><p class="soft">${t.result || L.phResult}</p></div>
   </section>
-  <h2 class="sec-title">${L.beforeAfter}</h2>
+  ${(p.before && p.after) ? `<h2 class="sec-title">${L.beforeAfter}</h2>
   <section class="grid two ba">
     <figure><figcaption class="eyebrow soft">${L.before}</figcaption>${shot(p.before, L.shotBefore, 't-sand')}</figure>
     <figure><figcaption class="eyebrow soft">${L.after}</figcaption>${shot(p.after, L.shotAfter, 't-panel')}</figure>
-  </section>
-  <section class="cell c-accent quote">
+  </section>` : ''}
+  ${t.quote ? `<section class="cell c-accent quote">
     <p class="eyebrow">${L.quote}</p>
-    <blockquote><p class="serif">“${t.quote || L.phQuote}”</p><footer>${t.author || L.phAuthor}</footer></blockquote>
-  </section>
+    <blockquote><p class="serif">“${t.quote}”</p><footer>${t.author || ''}</footer></blockquote>
+  </section>` : ''}
   <section class="grid cta-row">
     <div class="cell c-panel cta-main">
       <div class="txt"><h2>${T.cta[0]}</h2><p class="lead">${T.cta[1]}</p></div>

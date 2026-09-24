@@ -230,7 +230,13 @@ legend{font-size:14px;font-weight:800;padding:0;margin-bottom:10px}
 .tags span{padding:6px 12px;border-radius:999px;background:var(--sand);font-size:13px;font-weight:800}
 .shot{position:relative;border-radius:calc(var(--r-xl) - 10px);overflow:hidden;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;flex-grow:1;min-height:180px}
 .proj-big .shot{aspect-ratio:auto;min-height:320px}
-.shot img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0}
+.shot img{width:100%;height:100%;object-fit:cover;object-position:top left;display:block;position:absolute;inset:0}
+.case-shot .shot{background:var(--panel)}
+.case-shot .shot{aspect-ratio:1.93/1;min-height:0}
+.case-shot .shot img{object-position:top center}
+.concept{color:var(--ink);opacity:.75}
+.case-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px}
+.concept-pill{display:inline-flex;align-items:center;height:40px;padding:0 16px;border-radius:999px;border:2px solid var(--on-panel-muted);color:var(--on-panel);font-size:14px;font-weight:800}
 .shot-bar{position:absolute;top:0;left:0;right:0;height:34px;display:flex;align-items:center;gap:6px;padding:0 16px;background:rgba(255,255,255,.14)}
 .shot-bar i{width:9px;height:9px;border-radius:99px;background:currentColor;opacity:.45}
 .shot-label{font-size:15px;font-weight:700;opacity:.8;padding:0 20px;text-align:center}

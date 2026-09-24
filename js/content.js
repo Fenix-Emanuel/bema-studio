@@ -34,7 +34,8 @@ window.BEMA_CONTENT = {
       shot:'[Captura del proyecto]', shotBefore:'[Captura de antes]', shotAfter:'[Captura de después]',
       phChallenge:'[Qué problema tenía el negocio antes de trabajar con ustedes.]', phDid:['[Primera cosa que hicieron]','[Segunda cosa que hicieron]','[Tercera cosa que hicieron]'],
       phResult:'[Qué cambió después: más consultas, más ventas, mejor imagen.]', phQuote:'[Testimonio real del cliente, en sus palabras.]', phAuthor:'[Nombre, cargo]',
-      phSummary:'[Una frase que resuma el proyecto: qué hicieron y para quién.]', phYear:'[AÑO]', phPlace:'[CIUDAD], TX'},
+      phSummary:'[Una frase que resuma el proyecto: qué hicieron y para quién.]', phYear:'[AÑO]', phPlace:'[CIUDAD], TX',
+      idea:'La idea', status:'Estado', concept:'Proyecto conceptual', live:'Ver sitio en vivo'},
     examples:'Ejemplos',
     included:'Qué incluye', forWho:'¿Para quién es?', faq:'Preguntas frecuentes',
     cta:['¿Te interesa? Hablemos.','La primera conversación es sin costo y sin compromiso.','Escríbenos'], next:'Siguiente',
@@ -96,7 +97,8 @@ window.BEMA_CONTENT = {
       shot:'[Project screenshot]', shotBefore:'[Before screenshot]', shotAfter:'[After screenshot]',
       phChallenge:'[What problem the business had before working with you.]', phDid:['[First thing you did]','[Second thing you did]','[Third thing you did]'],
       phResult:'[What changed: more inquiries, more sales, a stronger image.]', phQuote:"[Real client testimonial, in their own words.]", phAuthor:'[Name, role]',
-      phSummary:'[One sentence summing up the project: what you did and for whom.]', phYear:'[YEAR]', phPlace:'[CITY], TX'},
+      phSummary:'[One sentence summing up the project: what you did and for whom.]', phYear:'[YEAR]', phPlace:'[CITY], TX',
+      idea:'The idea', status:'Status', concept:'Concept project', live:'View live site'},
     examples:'Examples',
     included:"What's included", forWho:"Who it's for", faq:'Frequently asked questions',
     cta:["Interested? Let's talk.",'The first conversation is free, with no commitment.','Get in touch'], next:'Next',
@@ -144,25 +146,52 @@ window.BEMA_CONTENT = {
      shot, before y after (por ejemplo 'assets/proyectos/panaderia.jpg').
    ========================================================= */
 window.BEMA_PROJECTS = [
-  { id:'cliente-1', cats:['web','brand'], name:'[Cliente 1]',
-    es:{type:'Panadería'}, en:{type:'Bakery'} },
-  { id:'cliente-2', cats:['brand','mkt'], name:'[Cliente 2]',
-    es:{type:'Salón de belleza'}, en:{type:'Beauty salon'} },
-  { id:'cliente-3', cats:['web','mkt'], name:'[Cliente 3]',
-    es:{type:'Food truck'}, en:{type:'Food truck'} },
-  { id:'cliente-4', cats:['web'], name:'[Cliente 4]',
-    es:{type:'Taller mecánico'}, en:{type:'Auto repair shop'} },
-  { id:'cliente-5', cats:['brand'], name:'[Cliente 5]',
-    es:{type:'Estudio de fotografía'}, en:{type:'Photography studio'} },
-  { id:'cliente-6', cats:['mkt'], name:'[Cliente 6]',
-    es:{type:'Tienda de ropa'}, en:{type:'Clothing store'} }
-  /* Ejemplo de un proyecto completo:
-  { id:'panaderia-rosa', cats:['web','brand'], name:'Panadería Rosa',
-    shot:'assets/proyectos/rosa.jpg', before:'assets/proyectos/rosa-antes.jpg', after:'assets/proyectos/rosa-despues.jpg',
+  { id:'evo-solutions', cats:['web'], name:'EVO Solutions+',
+    shot:'assets/proyectos/evo-solutions.jpg', url:'https://fenix-emanuel.github.io/evo-landing/',
     year:'2026', place:'Austin, TX',
-    es:{ type:'Panadería', summary:'Web y marca nuevas para una panadería familiar.',
-         challenge:'...', did:['...','...'], result:'...', quote:'...', author:'Rosa M., dueña' },
-    en:{ type:'Bakery', summary:'A new website and brand for a family bakery.',
-         challenge:'...', did:['...','...'], result:'...', quote:'...', author:'Rosa M., owner' } },
+    es:{ type:'Redes e infraestructura',
+         summary:'Sitio bilingüe para una empresa de cableado estructurado, fibra óptica, Wi-Fi y seguridad en Austin.',
+         challenge:'Explicar servicios técnicos de forma simple, para clientes que hablan inglés o español, y lograr que pedir un presupuesto fuera rápido.',
+         did:['Sitio de una página en inglés y español, con selector de idioma','Servicios organizados en cuatro categorías fáciles de recorrer','El proceso de trabajo explicado en cuatro pasos','Formulario que arma el mensaje y lo abre directo en WhatsApp'],
+         result:'[Qué cambió para EVO: consultas recibidas, más presupuestos, mejor imagen.]' },
+    en:{ type:'Network & infrastructure',
+         summary:'A bilingual website for a structured cabling, fiber optics, Wi-Fi, and security company in Austin.',
+         challenge:'Explain technical services in plain language for English- and Spanish-speaking clients, and make requesting a quote fast.',
+         did:['One-page site in English and Spanish, with a language switcher','Services organized into four easy-to-browse categories','The work process explained in four steps','A form that drafts the message and opens it straight in WhatsApp'],
+         result:'[What changed for EVO: inquiries received, more quotes, a stronger image.]' } },
+
+  { id:'el-fogon-tx', cats:['web'], name:'El Fogón TX', concept:true,
+    shot:'assets/proyectos/el-fogon-tx.jpg', url:'https://fenix-emanuel.github.io/el_fogon_tx/',
+    year:'2026', place:'Austin, TX',
+    es:{ type:'Parrilla argentina',
+         summary:'Sitio conceptual para una parrilla argentina en Austin, con menú completo y reservas por WhatsApp.',
+         challenge:'Transmitir el calor de un asado familiar argentino a un público texano, en dos idiomas, y que reservar una mesa fuera tan fácil como mandar un mensaje.',
+         did:['Diseño oscuro y cálido, inspirado en el fuego de la parrilla','Platos destacados cuyos ingredientes aparecen a medida que bajas','Menú completo con precios, organizado por categorías','Reservas que se envían directo por WhatsApp','Sitio completo en inglés y español'],
+         result:'Proyecto conceptual: el sitio está terminado y listo para usarse cuando el restaurante abra sus puertas.' },
+    en:{ type:'Argentine grill',
+         summary:'A concept website for an Argentine grill in Austin, with a full menu and WhatsApp reservations.',
+         challenge:'Bring the warmth of an Argentine family asado to a Texas audience, in two languages, and make booking a table as easy as sending a text.',
+         did:['A dark, warm design inspired by the fire of the grill','Featured dishes whose ingredients appear as you scroll','A full menu with prices, organized by category','Reservations sent straight through WhatsApp','The whole site in English and Spanish'],
+         result:'Concept project: the site is finished and ready to go live the day the restaurant opens.' } },
+
+  { id:'hugos-cafeteria', cats:['web'], name:"HUGO'S Cafetería", concept:true,
+    shot:'assets/proyectos/hugos-cafeteria.jpg', url:'https://fenix-emanuel.github.io/hugos-cafeteria/',
+    year:'2026', place:'Austin, TX',
+    es:{ type:'Cafetería de especialidad',
+         summary:'Sitio conceptual para una cafetería de especialidad con pastelería argentina en Austin.',
+         challenge:'Contar la historia detrás del nombre, mostrar un menú de café y pastelería argentina, y reunir pedidos, catering y reservas en un solo lugar.',
+         did:['Estética elegante en tonos café y dorado','Historia de la marca contada en primera persona','Menú con bebidas, pastelería argentina y sándwiches','Pedidos, catering y reservas por WhatsApp','Sitio completo en inglés y español'],
+         result:'Proyecto conceptual: el sitio está terminado y listo para usarse cuando la cafetería abra sus puertas.' },
+    en:{ type:'Specialty coffee shop',
+         summary:'A concept website for a specialty coffee shop with Argentine pastry in Austin.',
+         challenge:'Tell the story behind the name, showcase a coffee and Argentine pastry menu, and bring orders, catering, and reservations into one place.',
+         did:['An elegant look in coffee and gold tones','The brand story told in the first person','A menu of drinks, Argentine pastry, and sandwiches','Orders, catering, and reservations through WhatsApp','The whole site in English and Spanish'],
+         result:'Concept project: the site is finished and ready to go live the day the coffee shop opens.' } }
+
+  /* Campos opcionales para cada proyecto:
+     concept:true   → muestra la etiqueta "Proyecto conceptual"
+     url:'https://…' → muestra el botón "Ver sitio en vivo"
+     before / after: 'assets/proyectos/…jpg' → muestra la sección "Antes y después"
+     dentro de es / en: quote:'…', author:'Nombre, cargo' → muestra el testimonio
   */
 ];

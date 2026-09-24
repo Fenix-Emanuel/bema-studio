@@ -18,6 +18,7 @@ bema-studio/
 │   ├── favicon.svg          → ícono de la pestaña del navegador
 │   ├── apple-touch-icon.png → ícono al guardar el sitio en un iPhone
 │   ├── og-image.png         → imagen que aparece al compartir el link (WhatsApp, redes)
+│   ├── proyectos/           → imágenes de los trabajos realizados
 │   ├── bema-icon.svg        → ícono del logo para fondos claros
 │   └── bema-icon-light.svg  → ícono del logo para fondos oscuros
 ├── robots.txt
@@ -67,8 +68,19 @@ Justo debajo están los mismos tokens para el modo oscuro.
 | `#/sitios-web`  | Sitios web   |
 | `#/branding`    | Branding     |
 | `#/marketing`   | Marketing    |
+| `#/proyectos`   | Proyectos    |
+| `#/proyectos/id`| Cada proyecto|
 | `#/proceso`     | Proceso      |
 | `#/contacto`    | Contacto     |
+
+## Agregar un proyecto
+
+1. Guarda las imágenes en `assets/proyectos/` (formato .jpg o .webp, idealmente 1600 px de ancho).
+2. Abre `js/content.js` y busca la sección **PROYECTOS REALIZADOS**.
+3. Copia el ejemplo completo que está comentado y reemplaza los datos.
+4. Los proyectos aparecen en el orden de la lista: los primeros tres se muestran en el inicio.
+
+Borra los proyectos de ejemplo (`[Cliente 1]`, etc.) cuando cargues los reales.
 
 ## Formulario de contacto
 

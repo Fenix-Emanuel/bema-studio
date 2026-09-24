@@ -14,7 +14,7 @@ window.BEMA_CONTENT = {
     skip:'Saltar al contenido', homeLabel:'BEMA Studio, inicio', navLabel:'Principal', menuLabel:'Menú',
     openMenu:'Abrir menú', closeMenu:'Cerrar menú', langLabel:'Idioma', start:'Empecemos',
     made:'Hecho con convicción en Texas', back:'← Volver al inicio',
-    nav:{'/':'Inicio','/sitios-web':'Sitios web','/branding':'Branding','/marketing':'Marketing','/proceso':'Proceso','/contacto':'Contacto'},
+    nav:{'/':'Inicio','/sitios-web':'Sitios web','/branding':'Branding','/marketing':'Marketing','/proyectos':'Proyectos','/proceso':'Proceso','/contacto':'Contacto'},
     home:{
       eyebrow:'Para emprendedores que van en serio', h1:'Tu marca, lista para crecer.',
       btn:'Empieza tu proyecto', sub:'Web, branding y marketing a un precio pensado para quien recién arranca.',
@@ -26,6 +26,16 @@ window.BEMA_CONTENT = {
       final:'¿Arrancamos?', finalSub:'La primera conversación es sin costo. Somos Bryan y Emanuel, y queremos conocer tu negocio.',
       write:'Escríbenos', email:'[TU EMAIL]'
     },
+    work:{eyebrow:'Proyectos', title:'Negocios que ya están creciendo.', all:'Ver todos los proyectos'},
+    projectsPage:{eyebrow:'Proyectos', h1:'Nuestro trabajo.', lead:'Cada proyecto es un negocio real que confió en nosotros. Estos son algunos de ellos.',
+      filters:{all:'Todos', web:'Sitios web', brand:'Branding', mkt:'Marketing'}, view:'Ver proyecto', empty:'Todavía no hay proyectos en esta categoría.'},
+    caseLabels:{back:'← Todos los proyectos', services:'Servicios', year:'Año', place:'Ubicación', challenge:'El desafío', did:'Lo que hicimos', result:'El resultado',
+      beforeAfter:'Antes y después', before:'Antes', after:'Después', quote:'Lo que dice el cliente', next:'Siguiente proyecto',
+      shot:'[Captura del proyecto]', shotBefore:'[Captura de antes]', shotAfter:'[Captura de después]',
+      phChallenge:'[Qué problema tenía el negocio antes de trabajar con ustedes.]', phDid:['[Primera cosa que hicieron]','[Segunda cosa que hicieron]','[Tercera cosa que hicieron]'],
+      phResult:'[Qué cambió después: más consultas, más ventas, mejor imagen.]', phQuote:'[Testimonio real del cliente, en sus palabras.]', phAuthor:'[Nombre, cargo]',
+      phSummary:'[Una frase que resuma el proyecto: qué hicieron y para quién.]', phYear:'[AÑO]', phPlace:'[CIUDAD], TX'},
+    examples:'Ejemplos',
     included:'Qué incluye', forWho:'¿Para quién es?', faq:'Preguntas frecuentes',
     cta:['¿Te interesa? Hablemos.','La primera conversación es sin costo y sin compromiso.','Escríbenos'], next:'Siguiente',
     services:{
@@ -66,7 +76,7 @@ window.BEMA_CONTENT = {
     skip:'Skip to content', homeLabel:'BEMA Studio, home', navLabel:'Main', menuLabel:'Menu',
     openMenu:'Open menu', closeMenu:'Close menu', langLabel:'Language', start:"Let's start",
     made:'Made with conviction in Texas', back:'← Back to home',
-    nav:{'/':'Home','/sitios-web':'Websites','/branding':'Branding','/marketing':'Marketing','/proceso':'Process','/contacto':'Contact'},
+    nav:{'/':'Home','/sitios-web':'Websites','/branding':'Branding','/marketing':'Marketing','/proyectos':'Projects','/proceso':'Process','/contacto':'Contact'},
     home:{
       eyebrow:'For entrepreneurs who mean business', h1:'Your brand, ready to grow.',
       btn:'Start your project', sub:'Web, branding, and marketing priced for businesses that are just getting started.',
@@ -78,6 +88,16 @@ window.BEMA_CONTENT = {
       final:'Ready to start?', finalSub:"The first conversation is free. We're Bryan and Emanuel, and we'd love to hear about your business.",
       write:'Get in touch', email:'[YOUR EMAIL]'
     },
+    work:{eyebrow:'Projects', title:'Businesses that are already growing.', all:'See all projects'},
+    projectsPage:{eyebrow:'Projects', h1:'Our work.', lead:'Every project is a real business that trusted us. Here are some of them.',
+      filters:{all:'All', web:'Websites', brand:'Branding', mkt:'Marketing'}, view:'View project', empty:'No projects in this category yet.'},
+    caseLabels:{back:'← All projects', services:'Services', year:'Year', place:'Location', challenge:'The challenge', did:'What we did', result:'The result',
+      beforeAfter:'Before and after', before:'Before', after:'After', quote:'What the client says', next:'Next project',
+      shot:'[Project screenshot]', shotBefore:'[Before screenshot]', shotAfter:'[After screenshot]',
+      phChallenge:'[What problem the business had before working with you.]', phDid:['[First thing you did]','[Second thing you did]','[Third thing you did]'],
+      phResult:'[What changed: more inquiries, more sales, a stronger image.]', phQuote:"[Real client testimonial, in their own words.]", phAuthor:'[Name, role]',
+      phSummary:'[One sentence summing up the project: what you did and for whom.]', phYear:'[YEAR]', phPlace:'[CITY], TX'},
+    examples:'Examples',
     included:"What's included", forWho:"Who it's for", faq:'Frequently asked questions',
     cta:["Interested? Let's talk.",'The first conversation is free, with no commitment.','Get in touch'], next:'Next',
     services:{
@@ -112,3 +132,37 @@ window.BEMA_CONTENT = {
       steps:[['We reply','Within [X] business hours.'],["We talk",'A short call to get to know your business.'],['Proposal','We send you a clear plan and price.']]}
   }
 };
+
+/* =========================================================
+   PROYECTOS REALIZADOS
+   ---------------------------------------------------------
+   Agrega un bloque por cada trabajo. Los más nuevos, arriba.
+   - id: se usa en la dirección (#/proyectos/id). Sin espacios ni tildes.
+   - cats: 'web', 'brand' y/o 'mkt' (sirve para los filtros).
+   - Los campos que no completes muestran un texto de ejemplo entre [ ].
+   - Para las imágenes: guárdalas en assets/proyectos/ y pon la ruta en
+     shot, before y after (por ejemplo 'assets/proyectos/panaderia.jpg').
+   ========================================================= */
+window.BEMA_PROJECTS = [
+  { id:'cliente-1', cats:['web','brand'], name:'[Cliente 1]',
+    es:{type:'Panadería'}, en:{type:'Bakery'} },
+  { id:'cliente-2', cats:['brand','mkt'], name:'[Cliente 2]',
+    es:{type:'Salón de belleza'}, en:{type:'Beauty salon'} },
+  { id:'cliente-3', cats:['web','mkt'], name:'[Cliente 3]',
+    es:{type:'Food truck'}, en:{type:'Food truck'} },
+  { id:'cliente-4', cats:['web'], name:'[Cliente 4]',
+    es:{type:'Taller mecánico'}, en:{type:'Auto repair shop'} },
+  { id:'cliente-5', cats:['brand'], name:'[Cliente 5]',
+    es:{type:'Estudio de fotografía'}, en:{type:'Photography studio'} },
+  { id:'cliente-6', cats:['mkt'], name:'[Cliente 6]',
+    es:{type:'Tienda de ropa'}, en:{type:'Clothing store'} }
+  /* Ejemplo de un proyecto completo:
+  { id:'panaderia-rosa', cats:['web','brand'], name:'Panadería Rosa',
+    shot:'assets/proyectos/rosa.jpg', before:'assets/proyectos/rosa-antes.jpg', after:'assets/proyectos/rosa-despues.jpg',
+    year:'2026', place:'Austin, TX',
+    es:{ type:'Panadería', summary:'Web y marca nuevas para una panadería familiar.',
+         challenge:'...', did:['...','...'], result:'...', quote:'...', author:'Rosa M., dueña' },
+    en:{ type:'Bakery', summary:'A new website and brand for a family bakery.',
+         challenge:'...', did:['...','...'], result:'...', quote:'...', author:'Rosa M., owner' } },
+  */
+];

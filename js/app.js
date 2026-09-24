@@ -9,6 +9,7 @@
    ========================================================= */
 (function(){
 const I18N = window.BEMA_CONTENT;
+const PROJECTS = window.BEMA_PROJECTS || [];
 
 /* ===================== íconos ===================== */
 const ICON = {
@@ -79,6 +80,7 @@ function home(){
       </ol>
     </div>
   </section>
+  ${workSection()}
   <section class="cell c-panel final" aria-labelledby="h-final">
     <div class="final-text"><h2 id="h-final">${h.final}</h2><p class="lead">${h.finalSub}</p></div>
     <div class="final-side"><a class="btn btn-accent" href="#/contacto">${h.write}</a><span class="soft">${h.email}</span></div>
@@ -104,6 +106,7 @@ function service(path){
     <div class="cell c-sand"><h2>${T.forWho}</h2><ul class="checks">${d.ideal.map(t=>`<li>${CHECK}<span>${t}</span></li>`).join('')}</ul></div>
     <div class="cell c-card"><h2>${T.faq}</h2><div class="faq">${d.faq.map((q,i)=>`<details${i===0?' open':''}><summary>${q[0]}${PLUS}</summary><p>${q[1]}</p></details>`).join('')}</div></div>
   </section>
+  ${examplesSection(path)}
   ${cta(d.next)}`;
 }
 
@@ -153,6 +156,128 @@ function contacto(){
   </ol>`;
 }
 
+/* ===================== proyectos ===================== */
+const CAT_KEYS = ['web','brand','mkt'];
+const SERVICE_CAT = {'/sitios-web':'web','/branding':'brand','/marketing':'mkt'};
+const TONES = ['t-panel','t-accent','t-sand'];
+function pText(p){ return p[lang] || {}; }
+function shot(src, label, tone){
+  if(src) return `<div class="shot"><img src="${esc(src)}" alt="" loading="lazy"></div>`;
+  return `<div class="shot ${tone}" role="img" aria-label="${esc(label)}"><span class="shot-bar"><i></i><i></i><i></i></span><span class="shot-label">${label}</span></div>`;
+}
+function catChips(p){
+  const f = T.projectsPage.filters;
+  return `<div class="tags">${p.cats.map(c=>`<span>${f[c]}</span>`).join('')}</div>`;
+}
+function projCard(p, i, big){
+  const t = pText(p);
+  return `<a class="cell c-card proj${big?' proj-big':''}" href="#/proyectos/${p.id}">
+    ${shot(p.shot, T.caseLabels.shot, TONES[i % 3])}
+    <div class="proj-meta">
+      <p class="eyebrow">${t.type || ''}</p>
+      <h3>${p.name}</h3>
+      ${t.summary ? `<p class="soft">${t.summary}</p>` : ''}
+      ${catChips(p)}
+    </div>
+  </a>`;
+}
+function workSection(){
+  const w = T.work, list = PROJECTS.slice(0,3);
+  if(!list.length) return '';
+  return `
+  <section class="work" aria-labelledby="h-work">
+    <div class="work-head">
+      <div><p class="eyebrow soft">${w.eyebrow}</p><h2 id="h-work" class="sec-title" style="padding-top:8px">${w.title}</h2></div>
+      <a class="link" href="#/proyectos" style="text-decoration:underline">${w.all}</a>
+    </div>
+    <div class="grid work-grid">
+      ${list.map((p,i)=>projCard(p,i,i===0)).join('')}
+    </div>
+  </section>`;
+}
+function examplesSection(path){
+  const cat = SERVICE_CAT[path];
+  const list = PROJECTS.filter(p=>p.cats.includes(cat)).slice(0,2);
+  if(!list.length) return '';
+  return `
+  <section aria-labelledby="h-ex">
+    <div class="work-head"><h2 id="h-ex" class="sec-title">${T.examples}</h2><a class="link" href="#/proyectos" style="text-decoration:underline">${T.work.all}</a></div>
+    <div class="grid ex-grid">${list.map((p,i)=>projCard(p, PROJECTS.indexOf(p), false)).join('')}</div>
+  </section>`;
+}
+let projFilter = 'all';
+function proyectos(){
+  const pp = T.projectsPage;
+  const icon = '<svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="10" height="10" rx="2"/><rect x="15" y="3" width="10" height="10" rx="2"/><rect x="3" y="15" width="10" height="10" rx="2"/><rect x="15" y="15" width="10" height="10" rx="2"/></svg>';
+  return `
+  <section class="grid page-hero">
+    <div class="cell c-panel main">
+      <div class="hero-top"><p class="eyebrow">${pp.eyebrow}</p><a class="back" href="#/">${T.back}</a></div>
+      <h1>${pp.h1}</h1>
+      <p class="lead">${pp.lead}</p>
+    </div>
+    <div class="cell c-accent icon-cell">${icon}</div>
+  </section>
+  <div class="filters" role="group" aria-label="${pp.eyebrow}">
+    ${['all',...CAT_KEYS].map(k=>`<button type="button" data-filter="${k}" aria-pressed="${k===projFilter}">${pp.filters[k]}</button>`).join('')}
+  </div>
+  <section class="grid proj-grid" id="projGrid" aria-live="polite">${projGridHTML()}</section>
+  ${cta('/contacto')}`;
+}
+function projGridHTML(){
+  const list = PROJECTS.map((p,i)=>[p,i]).filter(([p])=>projFilter==='all' || p.cats.includes(projFilter));
+  if(!list.length) return `<p class="soft" style="grid-column:1/-1;padding:24px 0">${T.projectsPage.empty}</p>`;
+  return list.map(([p,i])=>projCard(p,i,false)).join('');
+}
+function bindFilters(){
+  document.querySelectorAll('.filters button').forEach(b => b.addEventListener('click', () => {
+    projFilter = b.dataset.filter;
+    document.querySelectorAll('.filters button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    document.getElementById('projGrid').innerHTML = projGridHTML();
+  }));
+}
+function caso(id){
+  const i = PROJECTS.findIndex(p=>p.id===id);
+  const p = PROJECTS[i], t = pText(p), L = T.caseLabels, f = T.projectsPage.filters;
+  const next = PROJECTS[(i+1) % PROJECTS.length];
+  const did = (t.did && t.did.length) ? t.did : L.phDid;
+  return `
+  <section class="grid page-hero">
+    <div class="cell c-panel main">
+      <div class="hero-top"><p class="eyebrow">${t.type || ''}</p><a class="back" href="#/proyectos">${L.back}</a></div>
+      <h1>${p.name}</h1>
+      <p class="lead">${t.summary || L.phSummary}</p>
+    </div>
+    <div class="cell c-card case-facts">
+      <div><p class="eyebrow soft">${L.services}</p><div class="tags" style="margin-top:12px">${p.cats.map(c=>`<span>${f[c]}</span>`).join('')}</div></div>
+      <div><p class="eyebrow soft">${L.year}</p><p class="fact">${p.year || L.phYear}</p></div>
+      <div><p class="eyebrow soft">${L.place}</p><p class="fact">${p.place || L.phPlace}</p></div>
+    </div>
+  </section>
+  <div class="case-shot">${shot(p.shot, L.shot, TONES[i % 3])}</div>
+  <section class="grid case-three">
+    <div class="cell c-card"><p class="eyebrow soft">01</p><h2>${L.challenge}</h2><p class="soft">${t.challenge || L.phChallenge}</p></div>
+    <div class="cell c-sand"><p class="eyebrow soft">02</p><h2>${L.did}</h2><ul class="checks small">${did.map(x=>`<li>${CHECK}<span>${x}</span></li>`).join('')}</ul></div>
+    <div class="cell c-card"><p class="eyebrow soft">03</p><h2>${L.result}</h2><p class="soft">${t.result || L.phResult}</p></div>
+  </section>
+  <h2 class="sec-title">${L.beforeAfter}</h2>
+  <section class="grid two ba">
+    <figure><figcaption class="eyebrow soft">${L.before}</figcaption>${shot(p.before, L.shotBefore, 't-sand')}</figure>
+    <figure><figcaption class="eyebrow soft">${L.after}</figcaption>${shot(p.after, L.shotAfter, 't-panel')}</figure>
+  </section>
+  <section class="cell c-accent quote">
+    <p class="eyebrow">${L.quote}</p>
+    <blockquote><p class="serif">“${t.quote || L.phQuote}”</p><footer>${t.author || L.phAuthor}</footer></blockquote>
+  </section>
+  <section class="grid cta-row">
+    <div class="cell c-panel cta-main">
+      <div class="txt"><h2>${T.cta[0]}</h2><p class="lead">${T.cta[1]}</p></div>
+      <a class="btn btn-accent" href="#/contacto">${T.cta[2]}</a>
+    </div>
+    <a class="cell c-card next" href="#/proyectos/${next.id}"><span class="eyebrow">${L.next}</span><strong>${next.name} →</strong></a>
+  </section>`;
+}
+
 /* ===================== formulario ===================== */
 function bindForm(){
   const f = document.getElementById('contactForm'); if(!f) return;
@@ -173,17 +298,18 @@ function bindForm(){
 }
 
 /* ===================== navegación ===================== */
-const VIEWS = {'/':home,'/proceso':proceso,'/contacto':contacto};
+const VIEWS = {'/':home,'/proceso':proceso,'/contacto':contacto,'/proyectos':proyectos};
 const main = document.getElementById('main');
 const pills = document.getElementById('pills');
 const menuLinks = document.getElementById('menuLinks');
 const menu = document.getElementById('menu');
 const openBtn = document.getElementById('menuOpen');
-const DESKTOP_NAV = ['/sitios-web','/branding','/marketing','/proceso'];
-const MOBILE_NAV = ['/','/sitios-web','/branding','/marketing','/proceso'];
+const DESKTOP_NAV = ['/sitios-web','/branding','/marketing','/proyectos','/proceso'];
+const MOBILE_NAV = ['/','/sitios-web','/branding','/marketing','/proyectos','/proceso'];
 
 function currentPath(){
   const p = location.hash.replace(/^#/,'') || '/';
+  if(p.startsWith('/proyectos/') && PROJECTS.some(x => '/proyectos/'+x.id === p)) return p;
   return (VIEWS[p] || T.services[p]) ? p : '/';
 }
 function navHTML(list, cur, mobile){
@@ -200,13 +326,16 @@ function applyStatic(){
 }
 function route(opts){
   const path = currentPath();
-  main.innerHTML = T.services[path] ? service(path) : VIEWS[path]();
-  pills.innerHTML = navHTML(DESKTOP_NAV, path, false);
-  menuLinks.innerHTML = navHTML(MOBILE_NAV, path, true);
-  document.title = path === '/' ? T.metaTitle : `${T.nav[path]} · BEMA Studio`;
+  const caseId = path.startsWith('/proyectos/') ? path.slice(11) : null;
+  main.innerHTML = caseId ? caso(caseId) : T.services[path] ? service(path) : VIEWS[path]();
+  const navPath = caseId ? '/proyectos' : path;
+  pills.innerHTML = navHTML(DESKTOP_NAV, navPath, false);
+  menuLinks.innerHTML = navHTML(MOBILE_NAV, navPath, true);
+  document.title = path === '/' ? T.metaTitle : caseId ? `${PROJECTS.find(p=>p.id===caseId).name} · BEMA Studio` : `${T.nav[path]} · BEMA Studio`;
   if(!(opts && opts.keepScroll)){ closeMenu(false); window.scrollTo(0,0); if(route.ran) main.focus({preventScroll:true}); }
   route.ran = true;
   bindForm();
+  bindFilters();
 }
 function setLang(l){
   if(l === lang) return;

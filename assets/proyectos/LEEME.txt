@@ -1,0 +1,2 @@
+Guarda aquí las imágenes de los proyectos (por ejemplo panaderia.jpg)
+y pon la ruta en js/content.js, sección PROYECTOS REALIZADOS.

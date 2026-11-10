@@ -161,8 +161,10 @@ const CAT_KEYS = ['web','brand','mkt'];
 const SERVICE_CAT = {'/sitios-web':'web','/branding':'brand','/marketing':'mkt'};
 const TONES = ['t-panel','t-accent','t-sand'];
 function pText(p){ return p[lang] || {}; }
-function shot(src, label, tone){
-  if(src) return `<div class="shot"><img src="${esc(src)}" alt="" loading="lazy"></div>`;
+function shot(src, label, tone, name){
+  // En las tarjetas la imagen va junto al título (alt vacío); en la página del caso lleva descripción
+  const alt = name ? `${name} · ${String(label).replace(/[\[\]]/g,'')}` : '';
+  if(src) return `<div class="shot"><img src="${esc(src)}" alt="${esc(alt)}" loading="lazy"></div>`;
   return `<div class="shot ${tone}" role="img" aria-label="${esc(label)}"><span class="shot-bar"><i></i><i></i><i></i></span><span class="shot-label">${label}</span></div>`;
 }
 function catChips(p){
@@ -255,7 +257,7 @@ function caso(id){
       <div><p class="eyebrow soft">${L.place}</p><p class="fact">${p.place || L.phPlace}</p></div>
     </div>
   </section>
-  <div class="case-shot">${shot(p.shot, L.shot, TONES[i % 3])}</div>
+  <div class="case-shot">${shot(p.shot, L.shot, TONES[i % 3], p.name)}</div>
   <section class="grid case-three">
     <div class="cell c-card"><p class="eyebrow soft">01</p><h2>${p.concept ? L.idea : L.challenge}</h2><p class="soft">${t.challenge || L.phChallenge}</p></div>
     <div class="cell c-sand"><p class="eyebrow soft">02</p><h2>${L.did}</h2><ul class="checks small">${did.map(x=>`<li>${CHECK}<span>${x}</span></li>`).join('')}</ul></div>
@@ -263,8 +265,8 @@ function caso(id){
   </section>
   ${(p.before && p.after) ? `<h2 class="sec-title">${L.beforeAfter}</h2>
   <section class="grid two ba">
-    <figure><figcaption class="eyebrow soft">${L.before}</figcaption>${shot(p.before, L.shotBefore, 't-sand')}</figure>
-    <figure><figcaption class="eyebrow soft">${L.after}</figcaption>${shot(p.after, L.shotAfter, 't-panel')}</figure>
+    <figure><figcaption class="eyebrow soft">${L.before}</figcaption>${shot(p.before, L.shotBefore, 't-sand', p.name)}</figure>
+    <figure><figcaption class="eyebrow soft">${L.after}</figcaption>${shot(p.after, L.shotAfter, 't-panel', p.name)}</figure>
   </section>` : ''}
   ${t.quote ? `<section class="cell c-accent quote">
     <p class="eyebrow">${L.quote}</p>
